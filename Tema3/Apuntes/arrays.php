@@ -23,10 +23,21 @@ for ($i=0; $i < count($semana); $i++) {
     echo "<br>".$semana[$i];
 }
 
+
+
 //array dinamico
 //modifica su contenido/tamaño
 
 $semana[7]
 
+
+//array asociatico
+$arrayDaw = array();
+$arrayAS
+
+
+//recorrerlo
+
+ 
 
 ?>

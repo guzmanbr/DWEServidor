@@ -21,7 +21,7 @@
       <div class="col d-flex align-items-start">
         <div>
             <h3 class="fw-bold mb-0 fs-4 text-body-emphasis"><a href="Practicas/Practica2/index.php" class="nav-link">Practica 2</a></h3>
-            <p>Practica Idiomas </p>
+            <p>Practica idiomas y banderas.</p>
         </div>
       </div>
 
