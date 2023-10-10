@@ -1,9 +1,9 @@
 <?php
     $es = "Buenos días";
     $por = "Bom dia";
-    $ita = "Buongiorno";
     $gri = "Καλημέρα";
     $en = "Good Morning";
+    $ita = "Buongiorno";
 
     $elegido = $_GET["idioma"];
 

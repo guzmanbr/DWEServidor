@@ -8,20 +8,11 @@
 </head>
 <body>
 
-    <div class="container">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-          <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-            <h1 class="fs-4 px-5">Guzmán Benito Rodríguez</h1>
-          </a>
-
-          <ul class="nav ">
-            <li class="nav-item"><a href="index.html" class="nav-link active" aria-current="page">Inicio</a></li>
-          </ul>
+    <?
+      include("../../../Fragmentos/header.html")
+    ?>
     
-        </header>
-      </div>
 
-    
     <div class="container px-4 py-5" id="icon-grid">
         
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
@@ -44,7 +35,7 @@
 
         <div class="col d-flex align-items-start">
             <div>
-                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis"><a href="php/ejercicio2.php" class="nav-link">Ejercicio2</a></h3>
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis"><a href="php/ejercicio2.php?nombre=guzman" class="nav-link">Ejercicio2</a></h3>
                 <p>Crea una página a la que se le pase por url una variable con el nombre que quieras y 
                     muestre el valor de la variable, el tipo, si es numérico o no y si lo es, si es entero o float. (No 
                     hace falta usar if)
@@ -54,7 +45,7 @@
 
         <div class="col d-flex align-items-start">
             <div>
-                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis"><a href="php/ejercicio3.php" class="nav-link">Ejercicio3</a></h3>
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis"><a href="php/ejercicio3.php?ano=1998?mes=02?dia=01" class="nav-link">Ejercicio3</a></h3>
                 <p> Crea una página en la que se le pase como parámetros en la URL (ano, mes y día) y muestre 
                     el día de la semana de dicho día. (Por defecto, dale el valor de 03/10/2023) 
                 </p>
@@ -63,7 +54,7 @@
 
         <div class="col d-flex align-items-start">
              <div>
-                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis"><a href="php/ejercicio4.php" class="nav-link">Ejercicio4</a></h3>
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis"><a href="php/ejercicio4.php?fecha1=1998-02-01?fecha2=1998-01-01" class="nav-link">Ejercicio4</a></h3>
                 <p> Crea una página en la que se le pase como parámetros en la URL (ano, mes y día) de dos 
                     personas y muestre las fechas de nacimiento de ambos y la diferencia de edad en años. </p>
             </div>
@@ -72,13 +63,9 @@
         </div>
     </div>
 
-    <div class="container">
-        <footer class="py-3 my-4">
-          <p class="text-center text-muted"> Guzmán Benito Rodríguez</p>
-          <p class="text-center text-muted"> 2023-2024 IES Claudio Moyano</p>
-        </footer>
-    </div>
-
+    <?
+        include("../../../Fragmentos/footer.html")
+    ?>
 
 
 </body>
