@@ -145,7 +145,7 @@ echo "<h1>Leer fichero por lineas</h1>";
         }else {
             //paso la tuberia y el tamaño que quiero leer, y lo guardo en la variable asi lee linea a linea
             while ($leido = fgets($fp,filesize('ficheroLineas.txt'))) {
-                echo $leido." ftell ".ftell($fp)."<br>";
+                echo $leido."<br>";
             }
             
             fclose($fp);
@@ -197,7 +197,7 @@ echo "<h1>Escribir fichero por lineas en un sitio concreto</h1>";
         echo "Existe";
         echo "<br>";
         //guardo en fp el fichero, y en ft el temporal con w para ir copiandolo
-        if(!$fp = fopen('ficheroLineas.txt','r') || !$ft = fopen($tmp,'w')){
+        if((!$fp = fopen('ficheroLineas.txt','r')) || (!$ft = fopen($tmp,'w'))){
             echo "Ha habido un problema al abrir el fichero";
         }else {
             $texto = "Linea nueva\n";
