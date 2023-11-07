@@ -1,20 +1,6 @@
 <?php
-/*
-. Crea tu propio fichero de php que tenga las funciones de validación de formularios.
-    ● Todos los campos tienen que ser validados, por tu librería
-    ● Si hay alguno de los campos del formulario que no están correctos, se muestra
-    un mensaje en rojo, diciendo que está vacío
-    ● Los elementos que estén bien tienen que mantenerse
-    ● El Combo no puede elegirse la primera opción
-    ● Los check deben generarse dinámicamente
-    ● El número obligatorio debe ser entre 0 y 100
-    ● En la fecha obligatoria debe ser mayor de edad
-    ● Validar el número mínimo (1) y máximo (3) de checks
-    ● Subir una imagen
 
-*/
-
-//Comprueba si el input esta vacio
+//Texto vacio
 function textoVacio ($name){
     if (empty($_REQUEST[$name])) {
         return true;
@@ -23,82 +9,16 @@ function textoVacio ($name){
     }
 }
 
-//**********Radio***********
-
-//Comprueba si el radio esta vacio o no
-function radioVacio ($name){
-    //si existe una opcion no esta vacio
-    if (isset($_REQUEST[$name])) {
-        return false;
+//FICHERO VACIO
+function existeFichero($name){
+    if (isset($_FILES[$name])) {
+        return true;
     }else {
-        return true;//devuelve true cuando esta vacio
-    }
-}
-//recuerda el radio marcado
-function recuerdaRadio($name,$value){
-    if (enviado() && isset($_REQUEST[$name]) && $_REQUEST[$name] == $value) {
-        echo 'checked';
-    }
-    //si hay algo marcado lo borra al pulsar borrar
-    if (isset($_REQUEST['borrar'])) {
-        echo '';
-    }
-}
-
-//*********Check***********
-
-function generaCheck(){
-    
-}
-
-
-
-
-
-
-
-
-
-
-
-//recuerda el checkbox marcado
-function recuerdaCheck($name,$value){
-    //si en el array existe el valor lo deja marcado
-    if (enviado() && isset($_REQUEST[$name]) && in_array($value,$_REQUEST[$name])) {
-        echo 'checked';
-    }
-    //si hay algo marcado lo borra al pulsar borrar
-    if (isset($_REQUEST['borrar'])) {
-        echo '';
-    }
-}
-
-//************Select*************
-//select vacio
-function selectVacio ($name){
-    //si existe una opcion no esta vacio
-    if (isset($_REQUEST[$name]) && $_REQUEST[$name] != 0) {
         return false;
-    }else {
-        return true;//devuelve true cuando esta vacio
     }
 }
 
-function recuerdaSelect($name,$value){
-    //si en el array existe el valor lo deja marcado
-    if (enviado() && isset($_REQUEST[$name]) && $_REQUEST[$name] == $value) {
-        echo 'selected';
-    }
-    //si hay algo marcado lo borra al pulsar borrar
-    if (isset($_REQUEST['borrar'])) {
-        echo '';
-    }
-}
-
-
-
-
-//comprueba si se ha enviado el furmulario, si se ha clicado el boton enviar
+//Enviado
 function enviado(){
     if (isset($_REQUEST['enviar'])) {
         return true;
@@ -107,14 +27,88 @@ function enviado(){
     }
 }
 
-//Funcion que muestra el error si este existe en el array de errores
+//Errores
 function errores($errores,$name){
     if (isset($errores[$name])) {
         echo $errores[$name];
     }
 }
 
-/******** Recuerda ************/
+//Validar expresion
+function validarExpresionRegular($expresion, $name) {
+    if (preg_match($expresion, $_REQUEST[$name])) 
+        return true;
+    
+    return false;
+}
+
+
+/*****DNI********/
+function validarDni() {
+    //creo variable con el dni
+    $dniForm=$_REQUEST["dni"];
+    //seleciono solo la letra
+    $letraForm = substr($dniForm,8);
+    //seleciono solo los numeros
+    $numForm = substr($dniForm,0,8);
+    $valor= (int) ($numForm / 23);
+    $valor *= 23;
+    $valor= $numForm - $valor;
+    $letras= "TRWAGMYFPDXBNJZSQVHLCKEO";
+    $letra= substr ($letras, $valor, 1);
+    //compruebo si es la letra correcta
+    if($letra==$letraForm){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+/****MAYOR EDAD****/
+function mayorEdad(){
+    //pongo el mismo formato en la fecha del formulario y en la actual
+    $fecha=date("Y-m-d",strtotime($_REQUEST['fecha']));
+    $hoy=date("Y-m-d");
+    //creo objeto de ambas fechas para poder realizar la resta
+    $fecha2 = new Datetime($fecha);
+    $hoy2 = new Datetime($hoy);
+    //resto las fechas 
+    $diferencia= $hoy2->diff($fecha2);
+    //hago que la diferencia este en años
+    $edad = $diferencia->y;
+    //compruebo que la edad sea superior o igual a 18
+    if ($edad >=18){
+        return true;
+    }
+    return false;
+}
+
+/****Contraseñas****/
+function comprobarContraseñas(){
+    $pas1 = $_REQUEST['pass1'];
+    $pas2 = $_REQUEST['pass2'];
+    if ($pas1 == $pas2) {
+        return true;
+    }
+    return false;
+}
+
+/******Subir fichero********/
+
+function subirFichero($fichero){
+
+    $ruta = '/var/www/html/DWES/Tema3/Practica9/imagenes/';//guardo la ruta donde quiero que se guarde
+    $ruta .= basename($_FILES[$fichero]['name']);//le sumo a la ruta el nombre del fichero
+    if (move_uploaded_file($_FILES[$fichero]['tmp_name'],$ruta)) {//al fichero con nombre temporal,tmp_name, lo muevo a la ruta que puse antes
+        echo"Archivo subido";
+    }else {
+        echo "Error al subir el archivo";
+    }
+
+}
+
+
+/******** Recuerda *******/
 //Guarda lo que hay escrito en el input despues de enviar, tambien borra lo que hay escrito si se pulsa borrar
 function recuerda($name){
     //si se ha enviado y  no esta vacio, se guarda lo que hay escrito
@@ -128,54 +122,68 @@ function recuerda($name){
 }
 
 
-
 /************Validar****************/
 function validarFormulario(&$errores){
    
     //Nombre
     if (textoVacio('nombre1')) {
-        $errores['nombre1'] = "Nombre vacio";
+        $errores['nombre1'] = "Nombre vacio. ";
+    }elseif (!validarExpresionRegular('/^[a-z A-Z]{3,}$/', 'nombre1')) {
+        $errores['nombre1'] = "Minimo 3 caracteres.";
     }
+
     //Apellido
     if (textoVacio('apellido1')) {
-        $errores['apellido1'] = "Apellido vacio";
+        $errores['apellido1'] = "Apellido vacio. ";
+    }elseif (!validarExpresionRegular('/^[a-z A-Z]{3,}\s[a-z A-Z]{3,}$/', 'apellido1')) {
+        $errores['apellido1'] = "Mínimo 3 caracteres para el primer apellido, un espacio y mínimo 3 caracteres el segundo.";
     }
-    //Numero
-    if (textoVacio('num1')) {
-        $errores['num1'] = "Numero vacio";
+
+    //Contraseña1 esta vacio 
+    if (textoVacio('pass1')) {
+        $errores['pass1'] = "Contraseña vacia";
+    }elseif (!validarExpresionRegular('/[A-Z]{1,}[a-z]{1,}[0-9]{1,}/', 'pass1')) {
+        $errores['pass1'] = "Al menos 1 Mayúscula, 1 minúscula y 1 número";
     }
+
+    //Contraseña2 esta vacio 
+    if (textoVacio('pass2')) {
+        $errores['pass2'] = "Contraseña vacia";
+    } elseif (!comprobarContraseñas()) {
+        $errores['pass2'] = "La contraseña no coincide con la anterior";
+    }
+
     //Fecha
     if (textoVacio('fecha')) {
-        $errores['fecha'] = "Debe seleccionar una fecha";
+        $errores['fecha'] = "Debe escribir una fecha. ";
+    }elseif (!validarExpresionRegular('/^\d{1,2}\-\d{1,2}\-\d{4}$/', 'fecha')) {
+        $errores['fecha'] = "Escribir con formato dd-mm-yy. ";
+    }elseif (!mayorEdad()) {
+        $errores['fecha'] = "Menor de edad.";
     }
-    //Radio
-    if (radioVacio('opciones')) {
-        $errores['opciones'] = "Debe seleccionar una opcion";
-    }
-    //Select
-    if (selectVacio('selects')) {
-        $errores['selects'] = "Debe seleccionar un select";
-    }
-    //Checke
-    if (radioVacio('selects')) {
-        $errores['aficion'] = "Debe seleccionar al menos una opcion";
-    }
-    //Telefono 
-    if (textoVacio('telefono')) {
-        $errores['telefono'] = "Numero de telefono vacio";
-    }
+   
+    //Apellido
+    if (textoVacio('dni')) {
+        $errores['dni'] = "Apellido vacio. ";
+    }elseif (!validarExpresionRegular('/^\d{8}[A-Z]{1}/', 'dni')) {
+        $errores['dni'] = "Formato no valido de DNI, 11111111A";
+    }elseif (!validarDni()) {
+        $errores['dni'] = "El DNI no existe";
+    } 
+
     //Email esta vacio 
     if (textoVacio('email')) {
-        $errores['email'] = "Email vacio";
+        $errores['email'] = "Email vacio. ";
+    }elseif (!validarExpresionRegular('/^\w{1,}\@\D{1,}\.\D{2,}$/', 'email')) {
+        $errores['email'] = "1 o más caracteres, @, 1 o más caracteres, . y 2 o más caracteres.";
     }
-    //Contraseña esta vacio 
-    if (textoVacio('contraseña')) {
-        $errores['contraseña'] = "Contraseña vacia";
-    }
+
     //si fichero esta vacio
     if (textoVacio('fichero')) {
         $errores['fichero'] = "Fichero vacio";
-    }            
+    }elseif (!preg_match('/[jpg|png|bmp]$/', $_FILES['fichero']['name'])) {
+        $errores['fichero'] = "Formato de fichero incorrecto.";
+    }        
     
     if (count($errores) == 0) {
         return true;
@@ -185,6 +193,11 @@ function validarFormulario(&$errores){
 }
 
 
+
+
+function mostrarDatos(){
+
+}
 
 
 
