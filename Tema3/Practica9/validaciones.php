@@ -97,8 +97,9 @@ function comprobarContraseñas(){
 
 function subirFichero($fichero){
 
-    $ruta = '/var/www/html/DWES/Tema3/Practica9/imagenes/';//guardo la ruta donde quiero que se guarde
+    $ruta = '/var/www/html/DWEServidor/Tema3/Practica9/imagenes/';//guardo la ruta donde quiero que se guarde
     $ruta .= basename($_FILES[$fichero]['name']);//le sumo a la ruta el nombre del fichero
+
     if (move_uploaded_file($_FILES[$fichero]['tmp_name'],$ruta)) {//al fichero con nombre temporal,tmp_name, lo muevo a la ruta que puse antes
         //echo"Archivo subido";
     }else {
@@ -179,7 +180,7 @@ function validarFormulario(&$errores){
     }
 
     //si fichero esta vacio
-    if (textoVacio('fichero')) {
+    if (empty($_FILES['fichero']['name'])) {
         $errores['fichero'] = "Fichero vacio";
     }elseif (!preg_match('/[jpg|png|bmp]$/', $_FILES['fichero']['name'])) {
         $errores['fichero'] = "Formato de fichero incorrecto.";
