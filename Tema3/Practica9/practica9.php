@@ -18,7 +18,7 @@
         $errores = array();
         if (enviado() && validarFormulario($errores)) {
             subirFichero('fichero');
-            mostrarResultado();
+            mostrarDatos();
         
         }else{//si hay algun error vuelve a mostrar el formulario
     ?>

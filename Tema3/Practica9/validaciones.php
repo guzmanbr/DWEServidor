@@ -100,7 +100,7 @@ function subirFichero($fichero){
     $ruta = '/var/www/html/DWES/Tema3/Practica9/imagenes/';//guardo la ruta donde quiero que se guarde
     $ruta .= basename($_FILES[$fichero]['name']);//le sumo a la ruta el nombre del fichero
     if (move_uploaded_file($_FILES[$fichero]['tmp_name'],$ruta)) {//al fichero con nombre temporal,tmp_name, lo muevo a la ruta que puse antes
-        echo"Archivo subido";
+        //echo"Archivo subido";
     }else {
         echo "Error al subir el archivo";
     }
@@ -195,8 +195,23 @@ function validarFormulario(&$errores){
 
 
 
-function mostrarDatos(){
+function mostrarDatos() {
 
+    echo "<h1>Datos del formulario: </h1>";
+
+    echo "<br><br>Nombre: " . $_REQUEST['nombre1'];
+
+    echo "<br><br>Apellidos: " . $_REQUEST['apellido1'];
+
+    echo "<br><br>Contraseña: " . $_REQUEST['pass1'];
+
+    echo "<br><br>Fecha: " . $_REQUEST['fecha'];
+
+    echo "<br><br>DNI: " . $_REQUEST['dni'];
+
+    echo "<br><br>Email: " . $_REQUEST['email'];
+
+    echo '<br><p><img src="imagenes/'.$_FILES['fichero']['name'].'"></p>';
 }
 
 
