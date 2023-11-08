@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="estilos.css">
     <title>Formularios</title>
 </head>
-<body style="margin-left: 50px;">
+<body style="margin-left: 50px;" >
 
     
     <?php

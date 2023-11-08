@@ -27,7 +27,7 @@ function enviado(){
     }
 }
 
-//Errores
+//Errores lo muestra si existe
 function errores($errores,$name){
     if (isset($errores[$name])) {
         echo $errores[$name];
