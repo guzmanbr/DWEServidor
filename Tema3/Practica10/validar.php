@@ -27,7 +27,6 @@
     }
 
 //Leer Fichero
-
 function leer($fichero){
     if (file_exists($fichero)) {
         //abrir, si hay problema al abrir mensaje error, sino lo lee
@@ -50,30 +49,20 @@ function leer($fichero){
     }
 }
 
-
+//Guardar
 function guardar($fichero,$texto){
-    if (file_exists($fichero)) {
 
-        echo "Existe";
-        echo "<br>";
+    $fp = fopen($fichero,'w');
+    $longitud = strlen($texto);//longitud del texto
+    //le paso la tuberia, el texto a escribir y la longitud de lo que voy a escribir
 
-        // W
-        if(!$fp = fopen($fichero,'w')){
-            echo "Ha habido un problema al abrir el fichero";
-        }else {
-            $longitud = strlen($texto);//longitud del texto
-            //le paso la tuberia, el texto a escribir y la longitud de lo que voy a escribir
-            if (!fwrite($fp,$texto,$longitud)) {
-                echo "Error al escribir";
-            }else {
-                
-            }
-            fclose($fp);
-        }
-
-    }else{
-        echo "No existe";
+    if (!fwrite($fp,$texto,$longitud)) {
+        echo "Error al escribir";
+    }else {
+        
     }
+    fclose($fp);
+
 }
 
 

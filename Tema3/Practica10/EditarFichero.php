@@ -2,7 +2,6 @@
     include("./validar.php");
 ?>
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,8 +20,12 @@
         <label for="idTextoEditar">
             <textarea name="textoEditar" id="idTextoEditar" cols="60" rows="10"><?
             $fichero = $_GET['fichero'];
-            leer($fichero);
-            echo $fichero;
+            if (file_exists($fichero)) {
+                leer($fichero);
+            }else {
+                echo "No existe, escribe algo";
+            }
+
             ?></textarea>
         </label>
 
@@ -41,6 +44,8 @@
             }                     
             if (existe('guardar')) {
                 guardar($fichero,$_REQUEST['textoEditar']);
+                header('Location: ./LeeFichero.php?fichero='. $fichero); 
+                exit();
             }
         }
     ?>

@@ -15,21 +15,18 @@
 <body style="margin: 50px;  text-align: center;">
     <h1>Elige Fichero</h1>
     <br><br><br>
-    <?
-        $errores = array();
-    ?>
 
     <form action="" method="get" name="formulario1" enctype="multipart/form-data">
         <label for="idNombre">Nombre Fichero:
             <input type="text" name="nombreFichero" id="idNombre" >
 
             <?php
-            //comprobar que no este vacio
+                //comprobar que no este vacio
                 if (enviado() && textoVacio("nombreFichero")){
-                    ?><span><--Debe rellenar este campo.</span><?
+                    ?><span class="error"><== Debe rellenar este campo.</span><?
                 }
-                                   
-            //si no esta vacio y se ha pulsado algun boton 
+                                    
+                //si no esta vacio y se ha pulsado algun boton 
                 if (enviado() && !textoVacio('nombreFichero')) { 
 
                     //si el fichero existe va a leer o editar
@@ -38,23 +35,20 @@
                             header('Location: ./LeeFichero.php?fichero='. $_REQUEST["nombreFichero"]); 
                             exit();
                         }else{
-                            ?><span><--El fichero selecionado no existe.</span><?
+                            ?><span class="error"><== El fichero selecionado no existe.</span><?
                         }
                     }   
                     if (existe('editar')) {
-                        if (file_exists($_REQUEST['nombreFichero'])){
-                            header('Location: ./EditarFichero.php?fichero='. $_REQUEST["nombreFichero"]); 
-                            exit();
-                        }else {
-                            
-                        }
+                        header('Location: ./EditarFichero.php?fichero='. $_REQUEST["nombreFichero"]); 
+                        exit();
+            
                     }                     
                 }
         
             ?>
         </label>
 
-        <br>
+        <br><br>
         <input type="submit" value="Leer" name="leer">
         <input type="submit" value="Editar" name="editar">
 
