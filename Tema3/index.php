@@ -25,8 +25,6 @@
         </div>
       </div>
 
-      
-
       <div class="col d-flex align-items-start">
         <div>
             <h3 class="fw-bold mb-0 fs-4 text-body-emphasis"><a href="Practica5/practica5.php" class="nav-link">Practica 5</a></h3>
