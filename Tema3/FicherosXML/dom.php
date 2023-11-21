@@ -39,7 +39,7 @@ $dom -> formatOutput = true;
 
 
 //Leer---------------------------------------------------------------------------------------
-$dom->load('instrumentos.xml');//cargo el fichero
+$dom->load('instrumentos.xml');//cargo el fichero  load('instrumentos.xml',LIBXML_NOBLANKS) PARA QUITAR ESPACIOS 
 
 echo "<pre>";
 // print_r($dom);

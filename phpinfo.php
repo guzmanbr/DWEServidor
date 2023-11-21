@@ -2,5 +2,5 @@
     //asd;
     phpinfo();
     echo "Hola mundo";
-    xdebuginfo();
+    //xdebuginfo();
 ?>
