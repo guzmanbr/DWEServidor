@@ -52,7 +52,6 @@
 
                 
 
-
                 // echo "<tr>";
                 // echo "<td>". $elemento->children()[0]."</td>";
                 // echo "<td>". $elemento->children()[2]."</td>";

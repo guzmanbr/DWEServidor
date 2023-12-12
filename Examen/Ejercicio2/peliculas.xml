@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<peliculas>
+    <pelicula>
+        <id>0000MM-001</id>
+        <titulo>TITULOA</titulo>
+        <director>Tarantino</director>
+        <año>2025</año>
+        <actores>bradpit</actores>
+        <duracion>55:22:02</duracion>
+        <sinopsis>
+            asdfghjkl&#xF1;asdfghjkl&#xF1;asdfghjkl&#xF1;asdfghjkl&#xF1;asdfghjkl&#xF1;asdfghjkl&#xF1;asdfghjkl&#xF1;
+        </sinopsis>
+    </pelicula>
+    <pelicula>
+        <id>0000MM-001</id>
+        <titulo>TITULOA</titulo>
+        <director>Steven</director>
+        <año>2025</año>
+        <actores>bradpit</actores>
+        <duracion>55:22:02</duracion>
+        <sinopsis>
+            asdfghjkl&#xF1;asdfghjkl&#xF1;asdfghjkl&#xF1;asdfghjkl&#xF1;asdfghjkl&#xF1;asdfghjkl&#xF1;asdfghjkl&#xF1;
+        </sinopsis>
+    </pelicula>
+    <pelicula>
+        <id>0000MM-001</id>
+        <titulo>Django</titulo>
+        <director>Tarantino</director>
+        <año>2025</año>
+        <actores>george</actores>
+        <duracion>55:22:02</duracion>
+        <sinopsis>
+            asdfghjkl&#xF1;asdfghjkl&#xF1;asdfghjkl&#xF1;asdfghjkl&#xF1;asdfghjkl&#xF1;asdfghjkl&#xF1;asdfghjkl&#xF1;
+        </sinopsis>
+    </pelicula>
+</peliculas>
