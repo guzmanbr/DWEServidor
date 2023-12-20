@@ -39,7 +39,6 @@
     <form action="" method="post">
         <label for="user">Nombre</label>
         <input type="text" name="user" id="user">
-        <br><br>
         <label for="pass">Contraseña</label>
         <input type="password" name="pass" id="pass">
         <br><br>

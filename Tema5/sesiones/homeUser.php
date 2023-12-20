@@ -1,12 +1,15 @@
 <?
+    require('./funciones/conexionBD.php');
+    require('./funciones/validaciones.php');
     session_start();
-    if (!isset($_SESSION['usuario'])) {
+    //comprueba q tiene sesion iniciada
+    sesionIniciada();
+    // if (!isset($_SESSION['usuario'])) {
+    //     $_SESSION['error'] = "No tiene permiso para entrar en pagina user.";
+    //     header('Location: ./login.php');
+    //     exit;
+    // }
 
-        $_SESSION['error'] = "No tiene permiso para entrar en pagina user.";
-
-        header('Location: ./login.php');
-        exit;
-    }
 
 ?>
 
@@ -23,6 +26,16 @@
     <h1>Pagina User</h1>
     <?
         echo "Bienvenido ".$_SESSION['usuario']['nombre'];
+        $paginas = misPaginas();
+        echo"<br>";
+        if (isset($_SESSION['error'])) {
+            echo $_SESSION['error'];
+        }
+        echo "Las paginas que puede visitar son :<br>";
+        foreach ($paginas as $pagina) {
+            echo "<a href='./".$pagina."'>".$pagina."</a><br>";
+        }
+        
     ?>
     <br>
     <a href="./logout.php">LogOut</a>

@@ -1,0 +1,19 @@
+1 Prolema identificar el problema
+  introducion diciendo cual es y cual es la solucion a este
+  - Analisis
+	-Requisitos: Casos de uso escrito o UML
+	ejemplo (cliente registrado puede ver su perfil , ver productos, comprar)
+	-B.D: Analisis base con un modelo Entidad Relacion y posteriormente modelo relacional.
+	
+
+
+
+
+
+2 Requisitos
+-Home que puede acceder cualquiera (ej: mas vendidos, novedades...)
+ dentro de home un usuario no registrado tiene acceso a un login.
+
+Usuarios: cliente(ver su perfil,  comprar), administrador(dar de alta nuevos productos y modificar precio desc) y moderador(meter productos en el almacen).
+
+todas las tablas tienen un campo activo:0 o 1;
