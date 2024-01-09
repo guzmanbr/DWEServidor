@@ -23,7 +23,6 @@ require ('../funciones/funcionesBD.php')
             <tbody>
                 <?
                     $array_prod = findAll();
-
                     foreach ($array_prod as $prod) {
                         echo "<tr>";
                         echo "<td>".$prod['nombre']."</td>";
