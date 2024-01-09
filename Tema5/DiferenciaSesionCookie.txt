@@ -1,0 +1,14 @@
+    
+Solo se comparten cuando hay peticiones http
+
+Sesion
+    - Solo esta guardada en el servidor.
+    - Se borra con destroy o si pasa el tiempo de vida de la sesion.
+
+
+Cookie
+    - Solo esta guardada en el navegador.
+    - Se borra desde php con time -1, borrar a mano en navegador o si he puesto tiempo de sesion se borra al cerrar navegador.
+
+
+
