@@ -4,12 +4,13 @@
 
         // Si no existe alguno
         if (!isset($_COOKIE['id'])) {
+
             // Crear cookie con nombre id, guarde el id de la URL, se borre en 24h, se vea desde todo el dominio
             setcookie('id[1]', $id, time()+(3600*24), "/");
         
         // Si existe
         } else {
-            
+
             if (in_array($id, $_COOKIE['id'])) {
                 // Buscar si existe el mismo
                 if ($id == $_COOKIE['id'][2]) {

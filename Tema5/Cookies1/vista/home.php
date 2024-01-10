@@ -3,7 +3,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="eS">
+<html lang="en">
 
     <head>
         <meta charset="UTF-8">
@@ -22,15 +22,18 @@
             <h1>Productos</h1>
 
             <table>
+
                 <thead>
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Imagen</th>
                     <th>Ver</th>
                 </thead>
+
                 <tbody>
                     <?php
                         $array_prod = findAll();
+
                         foreach ($array_prod as $prod) {
                             echo "<tr>";                        
                                 echo "<td>" . $prod['nombre'] . "</td>";
@@ -47,17 +50,24 @@
 
         <div class="der">
             <h1>Ultimos visitados</h1>
+
                 <?php
+
                     if(!empty($_COOKIE)) {
+                        
                         ksort($_COOKIE['id']);
+
                         foreach ($_COOKIE['id'] as $value) {
+                            
                             $producto = findById($_COOKIE['id']);
+                            
                             if ($producto) {
                                 echo "<td><a href='verProducto.php?id=" . $producto['codigo'] . "'>";
                                 echo "<img src='../" . $producto['baja'] . "'>";
                                 echo "</a>";
                             }
                         }
+
                     } else {
                         echo "No ha visitado ningún producto";
                     }

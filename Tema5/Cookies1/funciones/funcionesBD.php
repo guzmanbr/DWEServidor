@@ -50,15 +50,20 @@
         
             // Consulta a la BBDD
             $sql = 'select * from producto where codigo = ?';
-            $stmt = $con -> prepare($sql);            
+
+            $stmt = $con -> prepare($sql);
+            
             $stmt -> execute(array($id));
+            
             $producto = $stmt -> fetch(PDO::FETCH_ASSOC);
              
             if ($producto) {
                 unset($con);
                 return $producto;
             }
+
             return false;
+
 
         } catch (PDOException $e) {
             echo $e -> getMessage();
@@ -69,13 +74,13 @@
         }
     }
 
-    function usuarioPermitido($url){
-        
-        if (in_array($url, $_SESSION['usuario']['paginas'])) {
-            return true;
-        }
-        return false;   
+    function usuarioPermitido($url)
+{
+    if (in_array($url, $_SESSION['usuario']['paginas'])) {
+        return true;
     }
+    return false;
+}
     
 
 ?>

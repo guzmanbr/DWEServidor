@@ -1,0 +1,148 @@
+body{
+    box-sizing: content-box;
+}
+/*---Header---*/
+header{
+    width: 100%;
+    height: 40px;
+    display: flex;
+}
+/*--Logo*/
+#divLogo{
+    width: 10%;
+    display: flex;
+}
+#imgLogo{
+    width: 155px;
+    height: 30px;
+    margin: auto;
+}
+/*--Navegador*/
+nav{
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+/*Paginas*/
+#divNav{
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+}
+/*Iconos navegador*/
+#iconosHeader{
+    width: 20%;
+    display: flex;
+    justify-content: space-evenly;
+}
+/*Estilo todos los iconos Pequeños*/
+.iconos{
+    height:30px;
+}
+
+
+/*----Main----*/
+main{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#novedades{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+    width: 80%;
+    height: 30%;
+    margin-top: 20px;
+
+}
+#novedades > p{
+    position: absolute;
+    margin-top: 15%;
+    font-size: 80px;
+    opacity: 100%;
+    
+}
+#novedades > a {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    opacity: 60%;
+
+}
+#novedades > a >img{
+    margin: auto;
+    width: 80%;
+    height: 100%;
+}
+#categorias{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    margin-top: 5% ;
+
+}
+#categorias > article{
+    width: 45%;
+    display: flex;
+    flex-direction: column-reverse;
+    height: fit-content;
+    margin-bottom: 5%;
+}
+#categorias > article:hover{
+    color: rgba(0, 0, 0, 0.658);
+    text-decoration: underline;
+    transition: 1s;
+    
+}
+#categorias > article > p{
+    font-size: 25px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+#categorias > article > img{
+    margin: auto;
+    opacity: 85%;
+    width: 420px;
+}
+/*----Footer----*/
+footer{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    font-size: 14px;
+}
+
+footer > div{
+    width: 24%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+h4{
+    text-align: center;
+}
+.divIconos{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.divIconos > img{
+    margin: 2% 7%;
+}
+
+#subs{
+    display: flex; 
+}
+#emailid{
+    width: 80%;
+    margin-right: 5px;
+}
+#check{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
