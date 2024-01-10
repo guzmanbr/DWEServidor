@@ -1,81 +1,71 @@
 <?php
-    require('confBD.php');
 
-    function findAll() {
+require("confBD.php");
+function findAll()
+{
+    try {
+        $DSN = "mysql:host=" . IP . ';dbname=' . BD;
+        $con = new PDO($DSN, USER, PASS);
 
-        try {
+        $sql = "select * from producto";
+        $stmt = $con->prepare($sql);
+        $stmt->execute();
+        $arrProductos = array();
+        while ($producto = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            array_push($arrProductos, $producto);
+        }
+        return $arrProductos;
 
-            // Data Source Name -> Contiene la información necesaria para conectarse a la base de datos
-            $DSN = 'mysql:host='.IP.';dbname='.BD;
+    } catch (\Throwable $th) {
 
-            // Generamos un objeto PDO para realizar la conexión
-            $con = new PDO($DSN, USER, PASS);
-        
-            // Consulta a la BBDD
-            $sql = 'select * from producto';
+        switch ($th->getCode()) {
 
-            $stmt = $con -> prepare($sql);
+            default:
+                echo $th->getMessage();
+                echo $th->getCode();
+        }
+    } finally {
+        unset($con);
+    }
 
-            
-            $stmt -> execute();
-            
-            $array_productos = array();
+}
 
-            while($producto = $stmt -> fetch(PDO::FETCH_ASSOC)) {
-                array_push($array_productos, $producto);
-            }
+function findById($id)
+{
+    try {
+        $DSN = "mysql:host=" . IP . ';dbname=' . BD;
+        $con = new PDO($DSN, USER, PASS);
 
-            return $array_productos;
+        $sql = "select * from producto where codigo = ?";
+        $stmt = $con->prepare($sql);
+        $producto = $stmt->execute([$id]);
 
-
-        } catch (PDOException $e) {
-            echo $e -> getMessage();
-        
-        } finally {
-            // Cerramos la conexion
+        $producto = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($producto) {
             unset($con);
+            return $producto;
         }
+        return false;
+        
+
+    } catch (\Throwable $th) {
+
+        switch ($th->getCode()) {
+
+            default:
+                echo $th->getMessage();
+                echo $th->getCode();
+        }
+    } finally {
+        unset($con);
     }
 
-
-    function findById($id) {
-
-        try {
-
-            // Data Source Name -> Contiene la información necesaria para conectarse a la base de datos
-            $DSN = 'mysql:host='.IP.';dbname='.BD;
-
-            // Generamos un objeto PDO para realizar la conexión
-            $con = new PDO($DSN, USER, PASS);
-        
-            // Consulta a la BBDD
-            $sql = 'select * from producto where codigo = ?';
-            $stmt = $con -> prepare($sql);            
-            $stmt -> execute(array($id));
-            $producto = $stmt -> fetch(PDO::FETCH_ASSOC);
-             
-            if ($producto) {
-                unset($con);
-                return $producto;
-            }
-            return false;
-
-        } catch (PDOException $e) {
-            echo $e -> getMessage();
-        
-        } finally {
-            // Cerramos la conexion
-            unset($con);
-        }
+}
+function usuarioPermitido($url)
+{
+    if (in_array($url, $_SESSION['usuario']['paginas'])) {
+        return true;
     }
-
-    function usuarioPermitido($url){
-        
-        if (in_array($url, $_SESSION['usuario']['paginas'])) {
-            return true;
-        }
-        return false;   
-    }
-    
-
+    return false;
+}
 ?>

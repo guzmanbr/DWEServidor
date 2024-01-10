@@ -1,70 +1,60 @@
 <?php
-    require('../funciones/funcionesBD.php');
+require("../funciones/funcionesBD.php");
 ?>
-
 <!DOCTYPE html>
-<html lang="eS">
+<html lang="es">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panaderia</title>
+</head>
 
-        <link rel="stylesheet" href="../weebroot/css/style.css">
-
-        <title>Panaderia</title>
-
-    </head>
-
-    <body>
-
-        <div class="izq">
-
-            <h1>Productos</h1>
-
-            <table>
-                <thead>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Imagen</th>
-                    <th>Ver</th>
-                </thead>
-                <tbody>
-                    <?php
-                        $array_prod = findAll();
-                        foreach ($array_prod as $prod) {
-                            echo "<tr>";                        
-                                echo "<td>" . $prod['nombre'] . "</td>";
-                                echo "<td>" . substr($prod['descripcion'],0,20) . "</td>";
-                                echo "<td><img src='../" . $prod['baja'] ."'></td>";
-                                echo "<td><a href='verProducto.php?id=".$prod['codigo']."'>Ver</a></td>";
-                            echo "</tr>";
-                        }
-                    ?>
-                </tbody>
-
-            </table>
-        </div>
-
-        <div class="der">
-            <h1>Ultimos visitados</h1>
+<body>
+    <div class="productos">
+        <h2>Productos</h2>
+        <table>
+            <thead>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Imagen</th>
+                <th>Ver</th>
+            </thead>
+            <tbody>
                 <?php
-                    if(!empty($_COOKIE)) {
-                        ksort($_COOKIE['id']);
-                        foreach ($_COOKIE['id'] as $value) {
-                            $producto = findById($_COOKIE['id']);
-                            if ($producto) {
-                                echo "<td><a href='verProducto.php?id=" . $producto['codigo'] . "'>";
-                                echo "<img src='../" . $producto['baja'] . "'>";
-                                echo "</a>";
-                            }
-                        }
-                    } else {
-                        echo "No ha visitado ningún producto";
-                    }
-
+                $arrProductos = findAll();
+                foreach ($arrProductos as $producto) {
+                    echo "<tr>";
+                    echo "<td>" . $producto['nombre'] . "</td>";
+                    echo "<td>" . substr($producto['descripcion'], 0, 40) . "</td>";
+                    echo "<td> <img src='../" . $producto['baja'] . "'></td>";
+                    echo "<td><a href='verProducto.php?id=" . $producto['codigo'] . "'>Ver</a></td>";
+                    echo "</tr>";
+                }
                 ?>
-        </div>
-        
-    </body>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="visitados">
+        <h2>Ultimos visitados</h2>
+        <?php
+        if (!empty($_COOKIE['id'])) {
+            // echo "<pre>";
+            // print_r($_COOKIE);
+            ksort($_COOKIE['id']);
+            foreach ($_COOKIE['id'] as $value) {
+                $producto = findByID($value);
+                echo "<td><a href='verProducto.php?id=" . $producto['codigo'] . "'>";
+                echo "<img src='../" . $producto['baja'] . "'>";
+                echo "</a>";
+            }
+
+        } else {
+            echo "No has visitado ningun producto";
+        }
+        ?>
+    </div>
+</body>
 
 </html>
