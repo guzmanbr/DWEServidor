@@ -19,7 +19,7 @@ class UserDao{
             $usuarioStd->fechaUltimaConexion,
             $usuarioStd->perfil,
             $usuarioStd->activo
-        );
+            );
             array_push($array_usuarios,$usuario);
             print_r($usuario);
 
@@ -58,7 +58,7 @@ class UserDao{
         //Creo a mano el array para meter solo los campos que euiero
         $parametros = array(
         $usuario->codUsuario,
-        $usuario->password,
+        sha1($usuario->password),
         $usuario->descUsuario,
         $usuario->fechaUltimaConexion,
         $usuario->activo
@@ -76,11 +76,30 @@ class UserDao{
 
     public static function update($usuario){
 
+        $sql = "update Usuario set  descUsuario=?, fechaUltimaConexion=?, perfil = ?, activo = ?  where codUsuario = ?;";
+        
+        //insertar todos los atributos en el array en el orden de la consulta
+        $parametros = array(
+        $usuario->descUsuario,
+        $usuario->fechaUltimaConexion,
+        $usuario->perfil,
+        $usuario->activo,
+        $usuario->codUsuario
+        );
+        
+        $result = FactoryBD::realizaConsulta($sql,$parametros);
+        if ($result->rowCount() > 0) {            
+            return true;
+        }
+
+    }
+    public static function cambioContraseña($usuario){
+
         $sql = "update Usuario set password = ?, descUsuario=?, fechaUltimaConexion=?, perfil = ?, activo = ?  where codUsuario = ?;";
         
         //insertar todos los atributos en el array en el orden de la consulta
         $parametros = array(
-        $usuario->password,
+        sha1($usuario->password),
         $usuario->descUsuario,
         $usuario->fechaUltimaConexion,
         $usuario->perfil,
