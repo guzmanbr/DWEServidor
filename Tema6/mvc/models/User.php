@@ -5,17 +5,18 @@ class User {
     private $codUsuario;
     private $password;
     private $descUsuario;
-    private $numAccesos;
     private $fechaUltimaConexion;
     private $perfil;//rol
+    private $activo;
 
     //Constructor
-    function __construct($codUsuario,$password,$descUsuario,$fechaUltimaConexion,$perfil){
+    function __construct($codUsuario,$password,$descUsuario,$fechaUltimaConexion,$perfil='usuario',$activo=true){
         $this->codUsuario = $codUsuario;
         $this->password = $password;
         $this->descUsuario = $descUsuario;
         $this->fechaUltimaConexion = $fechaUltimaConexion;
         $this->perfil = $perfil;
+        $this->activo = $activo;
     }
 
     //Get Set
