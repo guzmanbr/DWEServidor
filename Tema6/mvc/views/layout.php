@@ -18,24 +18,39 @@
         <h1>Pagina Web de Guzmán</h1>
         <nav>
             <div>
-                <form action="" method="post">
-                    <input type="submit" value="Login" name="login">
-                </form>
+                <?
+                if (validado()) {
+                    echo "Bienvenido ".$_SESSION['usuario']->descUsuario;
+                    ?>
+                        <form action="" method="post">
+                            <input type="submit" value="Ver Perfil" name="User_verPerfil">
+                            <input type="submit" value="Cerrar Sesion" name="logout">
+                        </form>
+                    <?
+                } else {
+                    ?>
+                        <form action="" method="post">
+                            <input type="submit" value="Login" name="login">
+                        </form>
+                    <?
+                }
+                ?>
             </div>
         </nav>
     </header>
     <main>
         <?
         if (!isset($_SESSION['vista'])) {
-            require $_SESSION['home'];
+            require  VIEWS . 'home.php';
         } else {
             require $_SESSION['vista'];
-         }
+        }
         ?>
 
         <!-- aqui van las vistas -->
     </main>
     <footer>
+        <br><br><br><br><br>
         <p>Copyright</p>
     </footer>
 

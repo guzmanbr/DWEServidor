@@ -6,11 +6,26 @@ session_start();
 
 if (isset($_REQUEST['login'])) {
     $_SESSION['vista'] = VIEWS.'login.php';
+    $_SESSION['controller'] = CONTROLLER.'LoginController.php';
+
 }elseif (isset($_REQUEST['home'])) {
     $_SESSION['vista'] = VIEWS.'home.php';
-}
 
+}elseif (isset($_REQUEST['logout'])) {//si se pulsa cerrar sesion
+    session_destroy();
+    header('Location: ./index.php');//hay que recargar la pagina para que expire la sesion, se recarga sin sesion
+
+}elseif (isset($_REQUEST['User_verPerfil'])) {//si se pulsa ver perfil
+    $_SESSION['vista'] = VIEWS.'verUsuario.php';
+    $_SESSION['controller'] = CONTROLLER.'UserController.php';
+}
+if (isset($_SESSION['controller'])) {
+    require($_SESSION['controller']);
+}
 require('./views/layout.php');
+
+
+
 
 
 

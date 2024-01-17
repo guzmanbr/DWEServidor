@@ -90,6 +90,8 @@ class UserDao{
         $result = FactoryBD::realizaConsulta($sql,$parametros);
         if ($result->rowCount() > 0) {            
             return true;
+        }else{
+            return false;
         }
 
     }
@@ -183,7 +185,7 @@ class UserDao{
             $usuarioStd->perfil,
             $usuarioStd->activo
             );
-            print_r($usuario);
+            //print_r($usuario);
             return $usuario;
         }else {
             return null;
