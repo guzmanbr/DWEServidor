@@ -66,7 +66,37 @@ require('./views/layout.php');
 // $usuario = UserDao::validarUsuario('maria','maria');
 
 // echo "<pre>";
+echo "<pre>";
+echo "FindAll---------------------------------------------------";
+print_r(CitaDao::findAll());
+echo "<br><br>";
 
+echo "FindId---------------------------------------------------";
+print_r(CitaDao::findById(2));
+echo "<br><br>";
+
+echo "Insert---------------------------------------------------";
+//$cita = new Cita (null,'dermatologo','Tengo un lunar.','2022-02-01',true,'3');
+//CitaDao::insert($cita);
+print_r(CitaDao::findAll());
+echo "<br><br>";
+
+echo "Update---------------------------------------------------";
+$cita1 =CitaDao::findById(1);
+$cita1->fecha='2022-02-02';
+CitaDao::update($cita1);
+print_r(CitaDao::findById(1));
+echo "<br><br>";
+
+echo "Find by paciente-----------------------------------------------";
+$usuario=UserDao::findById(1);
+print_r(CitaDao::findByPaciente($usuario));
+
+echo "Find by pacienteH-----------------------------------------------";
+$usuario=UserDao::findById(2);
+print_r(CitaDao::findByPacienteH($usuario));
+
+echo "<pre>";
 
 
 ?>

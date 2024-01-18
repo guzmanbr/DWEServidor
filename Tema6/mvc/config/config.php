@@ -18,6 +18,8 @@ require("./core/funciones.php");
 require("./dao/FactoryBD.php");
 require("./models/User.php");
 require("./dao/UserDAO.php");
+require("./models/Cita.php");
+require("./dao/CitaDao.php");
 
 
 

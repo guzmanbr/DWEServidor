@@ -26,5 +26,27 @@ if (isset($_REQUEST['Login_IniciarSesion'])) {
         
     }
 }elseif (isset($_REQUEST['Login_Registrar'])) {
-    # code...
+    $_SESSION['vista'] = VIEWS.'registro.php';
+}elseif (isset($_REQUEST['Login_GuardarRegistro'])) {
+    $errores = array();
+    //si el formulario esta relleno correctamente
+    if (validarFormularioR($errores)) {
+        //validado usuario en base de datos llamando a la funcion
+        $usuario = new User(
+            $_REQUEST['cod'], 
+            $_REQUEST['nombre'],
+            $_REQUEST['pass'],
+            date('Y-m-d')
+        );
+        //iniciar una sesion valida
+        if (UserDao::insert($usuario)) {
+            //mandarlo a la vista correspondiente
+            $_SESSION['vista']=VIEWS.'login.php';
+            $sms = "Se ha registrado correctamente.";
+        }else{
+            $errores['validado']="No existe el usuario.";
+        }
+    }else {
+        
+    }
 }

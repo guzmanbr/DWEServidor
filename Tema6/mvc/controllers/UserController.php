@@ -11,11 +11,11 @@ if (!validado()) {
         $_SESSION['vista'] = VIEWS.'editarUser.php';
 
     }elseif(isset($_REQUEST['User_CambiarContraseña'])) {
-        $_SESSION['vista'] = VIEWS.'editarUser.php';
+        $_SESSION['vista'] = VIEWS.'editarPassUser.php';
 
-    }elseif(isset($_REQUEST['User_editar'])) {
+    }elseif(isset($_REQUEST['User_Guardar'])) {
         $usuario = $_SESSION['usuario'];
-        if (!textVacio('nombre')) {
+        if (!textoVacio('nombre')) {
             $usuario->descUsuario = $_REQUEST['nombre'];
             if (UserDao::update($usuario)) {
                 $sms = "Se ha cambiado el nombre correctamente";
@@ -30,9 +30,9 @@ if (!validado()) {
         }
     }elseif (isset($_REQUEST['User_GuardarContraseña'])) {//cambiar la contraseña
         $usuario = $_SESSION['usuario'];
-        if (!textVacio('pass') && !textVacio('pass2') && passIgual($_REQUEST['pass1'],$_REQUEST['pass2'])) {
+        if (!textoVacio('pass1') && !textoVacio('pass2') && passIgual($_REQUEST['pass1'],$_REQUEST['pass2'],$errores)) {
             $usuario->password=$_REQUEST['pass1'];
-            if (UserDao::cambioContraseña($usuario)) {
+            if (UserDao::cambiarPassword($usuario->codUsuario,$_REQUEST['pass1'])) {
                 $sms = "Se ha cambiado la contraseña correctamente";
                 $_SESSION['usuario']= $usuario;//le paso a sesion el usuario actualizado
                 $_SESSION['vista'] = VIEWS.'verUsuario.php'; 

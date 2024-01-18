@@ -5,7 +5,7 @@
 <form action="" method="post">
 
     <label for="pass1">Pass:
-        <input type="text" name="pass1" id="pass1" value="<?echo $usuario->descUsuario?>">
+        <input type="text" name="pass1" id="pass1">
     </label>
     <span class="error">
         <?php
@@ -16,7 +16,7 @@
     </span>
     <br>
     <label for="pass2">Repite Pass:
-        <input type="text" name="pass2" id="pass2" value="<?echo $usuario->descUsuario?>">
+        <input type="text" name="pass2" id="pass2">
     </label>
     <span class="error">
         <?php

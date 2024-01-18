@@ -44,7 +44,7 @@ class UserDao{
             $usuarioStd->perfil,
             $usuarioStd->activo
             );
-            print_r($usuario);
+            //print_r($usuario);
             return $usuario;
         }else {
             return null;
@@ -69,7 +69,11 @@ class UserDao{
         //unset($parametros['4']);//asi le quitamos el perfil ya que no queremos insertarlo
         //array_pop($parametros);
         $result = FactoryBD::realizaConsulta($sql,$parametros);
-        return true;
+        if ($result->rowCount() > 0) {            
+            return true;
+        }else{
+            return false;
+        }
 
     }
 
@@ -95,25 +99,17 @@ class UserDao{
         }
 
     }
-    public static function cambioContraseña($usuario){
 
-        $sql = "update Usuario set password = ?, descUsuario=?, fechaUltimaConexion=?, perfil = ?, activo = ?  where codUsuario = ?;";
-        
-        //insertar todos los atributos en el array en el orden de la consulta
-        $parametros = array(
-        sha1($usuario->password),
-        $usuario->descUsuario,
-        $usuario->fechaUltimaConexion,
-        $usuario->perfil,
-        $usuario->activo,
-        $usuario->codUsuario
-        );
-        
-        $result = FactoryBD::realizaConsulta($sql,$parametros);
-        if ($result->rowCount() > 0) {            
+    public static function cambiarPassword($codUsuario, $password) {
+        $sql = "UPDATE Usuario SET password = ? WHERE codUsuario = ?";
+        $password = sha1($password);
+        $parametros = array($password, $codUsuario);
+        $result = FactoryBD::realizaConsulta($sql, $parametros);
+        if ($result) {
             return true;
+        } else {
+            return false;
         }
-
     }
 
 

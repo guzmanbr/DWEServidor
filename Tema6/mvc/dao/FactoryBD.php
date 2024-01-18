@@ -10,7 +10,7 @@ class FactoryBD{
             $stmt->execute($array_Parametros);
         } catch (PDOException $e) {
             $stmt = null;
-            echo $e->getMessage();
+            //echo $e->getMessage();
             unset($conn);
         }
         return $stmt;
