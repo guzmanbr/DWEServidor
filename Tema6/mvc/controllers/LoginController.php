@@ -1,7 +1,5 @@
 <?
 
-
-
 //si se pulsa iniciar sesion
 if (isset($_REQUEST['Login_IniciarSesion'])) {
     $errores = array();
@@ -35,7 +33,7 @@ if (isset($_REQUEST['Login_IniciarSesion'])) {
         $usuario = new User(
             $_REQUEST['cod'], 
             $_REQUEST['nombre'],
-            $_REQUEST['pass'],
+            $_REQUEST['pass1'],
             date('Y-m-d')
         );
         //iniciar una sesion valida

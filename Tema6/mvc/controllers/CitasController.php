@@ -1,29 +1,46 @@
 <?
+
+if (isset($_REQUEST['Cita_Pedir'])) {
+    $_SESSION['vista'] = VIEWS.'pedirCita.php';
+
+}elseif(isset($_REQUEST['Cita_GuardarCita'])){
+    $errores = array();
+    if (validaFormularioNuevaCita($errores)) {
+        //insert
+        $cita = new Cita(
+            null,
+            $_REQUEST['especialista'],
+            $_REQUEST['motivo'],
+            $_REQUEST['fecha'],
+            true,
+            $_SESSION['usuario']->codUsuario
+        );
+
+        if (!CitaDao::insert($cita)) {
+            $errores['insertar'] =  "No se ha podido generar su cita";
+        }else {
+            $sms ="Cita registrada con exito.";
+            $array_citas = CitaDao::findByPaciente($_SESSION['usuario']);
+            $_SESSION['vista'] = VIEWS.'verCitas.php';
+        }
+
+    }
+}elseif (isset($_REQUEST['Cita_VerAnterior'])) {
+    $array_citas = CitaDao::findByPacienteH($_SESSION['usuario']);
+
+}elseif (isset($_REQUEST['Citas_VerCitasTodas'])) {
+    $array_citas = CitaDao::findAll();
+}elseif (isset($_REQUEST['Cita_Ver'])) {
+    $cita = CitaDao::findById($_REQUEST['id']);
+    if (isAdmin()) {
+        $paciente = UserDao::findById($cita->paciente);
+    }
+    $_SESSION['vista'] = VIEWS.'verCita.php';
+}
+
+else{    
     $array_citas = CitaDao::findByPaciente($_SESSION['usuario']);
+    $_SESSION['vista'] = VIEWS.'verCitas.php';
+}
 
 ?>
-<table>
-    <thead>
-        <th>Especialista</th>
-        <th>Fecha</th>
-        <th>Ver</th>
-        <th>Cancelar</th>
-    </thead>
-    <tbody>
-    <?
-        foreach ($array_citas as $cita) {
-            echo "<tr>";
-                echo "<form method='post'>";
-                    echo " <input type='hidden' name='id' value='".$cita->id."'>";
-                    echo "<td>".$cita->especialista."</td>";
-                    echo "<td>".$cita->fecha."</td>";
-                    echo " <input type='submit' name='Cita_Ver' value='Ver'>";
-                    echo " <input type='submit' name='Cita_Cancelar' value='Cancelar'>";
-                echo "<form>";
-            echo "</tr>";
-        }
-    ?>
-
-    </tbody>
-
-</table>

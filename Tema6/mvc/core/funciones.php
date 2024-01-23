@@ -65,6 +65,31 @@ function validarFormularioR(&$errores){
     }
 }
 
+
+function validaFormularioNuevaCita(&$errores){
+
+    //codigo usuario
+    if (textoVacio('especialista')) {
+        $errores['especialista'] = "especialista vacio";
+    }
+    //si nombre esta vacio se guarda el error nombre vacio en el array de errores
+    if (textoVacio('fecha')) {
+        $errores['fecha'] = "fecha vacio";
+    }
+    //si pass esta vacio se guarda en errores[]
+    if (textoVacio('motivo')) {
+        $errores['motivo'] = "motivo vacio";
+    }
+
+    if (count($errores) == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+
 function validado()
 {
     if (isset($_SESSION['usuario'])) {
@@ -81,5 +106,14 @@ function passIgual($pass1, $pass2, &$errores)
         return false;
     } else {
         return true;
+    }
+}
+
+
+function isAdmin(){
+    if ($_SESSION['usuario']->perfil == 'administrador') {
+        return true;
+    }else {
+        return false;
     }
 }

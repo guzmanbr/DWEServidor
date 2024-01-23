@@ -1,3 +1,9 @@
+<?
+    if (isset($sms)) {
+        echo $sms;
+    }
+?>
+
 <form action="" method="post">
     <label for="nombre">Nombre:
         <input type="text" name="nombre" id="nombre">

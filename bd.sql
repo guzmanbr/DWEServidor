@@ -13,3 +13,4 @@ foreign key (paciente)
 references Usuario (codUsuario);
 
 insert into Cita values (null,'Otorrino','Tengo el oido hinchado.','2025-12-01',true,'1');
+update Usuarios set perfil = 'administrador' where codUsuario =1;

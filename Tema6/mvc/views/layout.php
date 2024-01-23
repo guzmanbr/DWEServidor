@@ -23,6 +23,12 @@
                     echo "Bienvenido ".$_SESSION['usuario']->descUsuario;
                     ?>
                         <form action="" method="post">
+                            <?
+                                if (isAdmin()) {
+                                    ?><input type="submit" value="Ver todas las citas" name="Citas_VerCitasTodas"><?
+                                }
+                            ?>
+                            <input type="submit" value="Ver Citas" name="User_verCitas">
                             <input type="submit" value="Ver Perfil" name="User_verPerfil">
                             <input type="submit" value="Cerrar Sesion" name="logout">
                         </form>
@@ -46,7 +52,6 @@
             require $_SESSION['vista'];
         }
         ?>
-
         <!-- aqui van las vistas -->
     </main>
     <footer>
